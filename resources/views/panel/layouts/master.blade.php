@@ -1,0 +1,5 @@
+@include('panel.partials.common.header')
+@include('panel.partials.common.preload')
+@include('panel.partials.common.nav')
+@yield('content')
+@include('panel.partials.common.footer')
