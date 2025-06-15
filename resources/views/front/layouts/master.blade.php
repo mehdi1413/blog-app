@@ -1,0 +1,7 @@
+@include('front.partials.common.header')
+@include('front.partials.common.preload')
+@include('front.partials.common.top-alert')
+@include('front.partials.common.sidebar-canvas')
+@include('front.partials.common.nav')
+@yield('content')
+@include('front.partials.common.footer')
