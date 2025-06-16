@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
@@ -37,9 +39,14 @@ class AuthController extends Controller
                 'password.mixed' => 'کلمه عبور باید شامل اعداد، حروف کوچک و بزرگ و کاراکترهای ویزه (!@#$%^&*) باشد.',
             ]);
         $user = User::create($data);
-        Auth::login($user);
-
-        //Send mail
+        if ($user) {
+            Auth::login($user);
+            //Send mail
+            Mail::to($data['email'])->send(new WelcomeMail(Auth::user(), $request->password));
+        } else {
+            // Redirect
+            return redirect()->back()->with('error', 'مشکلی در ثبت نام شما پیش آمده است، دوباره اقدام کنید.');
+        }
 
         // Redirect
         return redirect()->route('home')->withErrors([
