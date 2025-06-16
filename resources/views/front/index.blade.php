@@ -2,7 +2,7 @@
 @section('content')
 <main>
     @error('successLogin')
-    <div class="alert alert-success" role="alert">{{$message}}</div>
+    @include('notifications.success')
     @enderror
     @include('front.partials.index.trending')
     @include('front.partials.index.top-news')

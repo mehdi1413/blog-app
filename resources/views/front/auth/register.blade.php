@@ -3,6 +3,9 @@
 <main>
     <section>
         <div class="container">
+            @if(session()->has('error'))
+                @include('notifications.error')
+            @endif
             <div class="row">
                 <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
                     <div class="bg-primary bg-opacity-10 rounded p-4 p-sm-5">
